@@ -46,13 +46,13 @@ router.post("/add", auth, async (req, res) => {
 //Обновление
 router.put("/edit", auth, async (req, res) => {
   try {
-    const { id, field, newValue } = req.body;
-    // console.log(id);
-    await Product.updateOne({ _id: id }, { $set: { [field]: newValue } });
+    const { id, field, value } = req.body;
+    await Product.updateOne({ _id: id }, { $set: { [field]: value } });
+
     if (field === "name") {
       await ProductVariant.updateMany(
         { productId: id },
-        { $set: { productName: newValue } }
+        { $set: { productName: value } }
       );
     }
     const product = await Product.findOne({ _id: id });

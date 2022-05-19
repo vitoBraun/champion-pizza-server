@@ -55,6 +55,27 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+//Обновление
+router.put("/edit", auth, async (req, res) => {
+  try {
+    const { id, field, value } = req.body;
+    await ProductVariant.updateOne({ _id: id }, { $set: { [field]: value } });
+    // if (field === "name") {
+    //   await ProductVariant.updateMany(
+    //     { productId: id },
+    //     { $set: { productName: value } }
+    //   );
+    // }
+    const productVariant = await ProductVariant.findOne({ _id: id });
+    res.status(201).json({ success: true, productVariant });
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      message: "Что-то пошло не так c добавлением продукта в базу. " + e,
+    });
+  }
+});
+
 router.get("/:selectedProduct", auth, async (req, res) => {
   try {
     const productName = req.params.selectedProduct;

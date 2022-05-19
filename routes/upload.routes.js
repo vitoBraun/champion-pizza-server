@@ -17,7 +17,7 @@ uploadFile = async (req, res) => {
     categoryName = req.body.categoryName;
     const ext = file.name.split(".").pop();
     const fileName = req.body.fileNameTranslit + "." + ext;
-    const folderPath = "client/images/" + categoryName;
+    const folderPath = "images/" + categoryName;
     const path = folderPath + "/" + fileName;
 
     if (!fs.existsSync(folderPath)) {

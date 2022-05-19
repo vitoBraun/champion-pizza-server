@@ -45,6 +45,26 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+router.put("/edit", auth, async (req, res) => {
+  try {
+    const { id, field, value } = req.body;
+    await Category.updateOne({ _id: id }, { $set: { [field]: value } });
+    // if (field === "name") {
+    //   await ProductVariant.updateMany(
+    //     { productId: id },
+    //     { $set: { productName: value } }
+    //   );
+    // }
+    const category = await Category.findOne({ _id: id });
+    res.status(201).json({ success: true, category });
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      message: "Что-то пошло не так c добавлением продукта в базу. " + e,
+    });
+  }
+});
+
 router.delete("/:categoryId", auth, async (req, res) => {
   try {
     const categoryId = await Category.deleteOne({ _id: req.params.categoryId });
