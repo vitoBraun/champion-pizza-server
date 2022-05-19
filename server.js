@@ -14,7 +14,7 @@ const upload = require("express-fileupload");
 const PORT = process.env.PORT;
 var databaseURI;
 
-databaseURI = process.env.MONGO_URI_MYSERVER_PRODUCTION;
+databaseURI = process.env.MONGO_URI_MYSERVER;
 
 if (process.env.NODE_ENV === "development") {
   databaseURI = process.env.MONGO_URI_LOCALHOST;
