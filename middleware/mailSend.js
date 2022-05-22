@@ -35,6 +35,7 @@ const mailSend = ({ totalPrice, totalCount, items }, customer) => {
         "<tr><td>" +
         vrnt.items[0].name +
         " " +
+        vrnt.items[0].variantName +
         "</td><td>" +
         vrnt.items.length +
         "</td><td>" +
