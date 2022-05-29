@@ -70,7 +70,7 @@ const mailSend = ({ totalPrice, totalCount, items }, customer) => {
 
   message += customerData;
 
-  const emailSend = async () => {
+  const emailSend = async (email) => {
     const nodemailer = require("nodemailer");
     let transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -84,7 +84,7 @@ const mailSend = ({ totalPrice, totalCount, items }, customer) => {
 
     let result = await transporter.sendMail({
       from: process.env.SMTP_USER,
-      to: process.env.MAIL_TO_ADDRESS,
+      to: email,
       subject: "Новый заказ",
       text: "",
       html: `<div>${message}</div>`,
@@ -92,7 +92,9 @@ const mailSend = ({ totalPrice, totalCount, items }, customer) => {
     console.log(result);
   };
 
-  emailSend();
+  const emails = process.env.MAIL_TO_ADDRESS.split(' ')
+  emails.map(email => emailSend(email))
+
 };
 
 module.exports = mailSend;
