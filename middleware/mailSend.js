@@ -1,6 +1,6 @@
-const mailSend = ({ totalPrice, totalCount, items }, customer) => {
+const mailSend = ({ totalPrice, totalCount, items }, customer, order) => {
   let message =
-    "<table border=1><tr><td>Наименование</td><td>Количество</td><td>Сумма</td></tr>";
+    `<body><h3>Новый заказ №${order}</h3><table border=1><tr><td>Наименование</td><td>Количество</td><td>Сумма</td></tr>`;
   Object.keys(items).map((variant) => {
     const vrnt = items[variant];
     if (vrnt.items[0].categoryName.toUpperCase() === "Пицца".toUpperCase()) {
@@ -66,7 +66,7 @@ const mailSend = ({ totalPrice, totalCount, items }, customer) => {
       ? "<tr><td>Комментарий к заказу</td><td>" + customer.comment + "</td>"
       : "";
   customerData += "</tr>";
-  customerData += "</table>";
+  customerData += "</table></body>";
 
   message += customerData;
 
@@ -85,7 +85,7 @@ const mailSend = ({ totalPrice, totalCount, items }, customer) => {
     let result = await transporter.sendMail({
       from: process.env.SMTP_USER,
       to: email,
-      subject: "Новый заказ",
+      subject: `Новый заказ №${order}`,
       text: "",
       html: `<div>${message}</div>`,
     });
