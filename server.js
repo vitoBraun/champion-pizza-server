@@ -33,6 +33,12 @@ app.use('/api/check', (req, res) => {
     message: "Server ok",
   });
 })
+app.use('/api/check2', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Server ok",
+  });
+})
 
 //ENDPOINT FOR ADMIN
 app.use("/api/auth", require("./routes/auth.routes"));
