@@ -32,5 +32,4 @@ jobs:
           script: |
             cd /home/${{ secrets.REMOTE_USER }}/deploy/champion-pizza/server/
             npm i
-            exec bash
             pm2 startOrRestart ecosystem.config.js
