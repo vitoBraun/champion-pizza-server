@@ -14,16 +14,10 @@ const upload = require("express-fileupload");
 const PORT = process.env.PORT;
 var databaseURI;
 
-databaseURI = process.env.MONGO_URI_MYSERVER_PRODUCTION;
-
-if (process.env.NODE_ENV === "development") {
-  databaseURI = process.env.MONGO_URI_LOCALHOST;
-}
+databaseURI = process.env.MONGO_URI;
 
 app.use(express.json({ extended: true }));
 app.use(upload({}));
-
-// app.use("/", express.static(__dirname + "/client/build"));
 
 // ENDPOINTS FOR CLIENT
 app.use("/images", express.static(__dirname + "/images"));
@@ -46,9 +40,13 @@ async function start() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-
+  } catch (e) {
+    console.log("Database connection error", e.message);
+    process.exit(1);
+  }
+  try {
     app.listen(PORT, () => {
-      console.log(`App started on port ${PORT}`);
+      console.log(`App v2 started on port ${PORT}`);
     });
   } catch (e) {
     console.log("Server error ", e.message);
