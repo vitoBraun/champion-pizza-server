@@ -32,6 +32,4 @@ jobs:
           script: |
             cd /home/${{ secrets.REMOTE_USER }}/deploy/champion-pizza/server/
             npm i
-            "[ -s ~/.nvm/nvm.sh ] && source ~/.nvm/nvm.sh"
-            nvm use stable
             pm2 startOrRestart ecosystem.config.js
