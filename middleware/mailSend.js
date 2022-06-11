@@ -1,3 +1,5 @@
+
+
 const mailSend = ({ totalPrice, totalCount, items }, customer, order) => {
   let message =
     `<body><h3>Новый заказ №${order}</h3><table border=1><tr><td>Наименование</td><td>Количество</td><td>Сумма</td></tr>`;
@@ -72,15 +74,18 @@ const mailSend = ({ totalPrice, totalCount, items }, customer, order) => {
 
   const emailSend = async (email) => {
     const nodemailer = require("nodemailer");
-    let transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      secure: true,
+    const SMTPTransport = require('nodemailer-smtp-transport')
+
+    const transportOptions = new SMTPTransport({
+      service: 'Mail.ru',
       auth: {
         user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+        pass: process.env.SMTP_PASS
+      }
+    })
+
+    let transporter = nodemailer.createTransport(transportOptions);
+
 
     let result = await transporter.sendMail({
       from: process.env.SMTP_USER,
