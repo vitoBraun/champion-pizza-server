@@ -27,6 +27,12 @@ app.use("/api/order", require("./routes/order.routes"));
 app.use("/static/css", express.static(__dirname + "/admin/build/static/css"));
 app.use("/static/js", express.static(__dirname + "/admin/build/static/js"));
 app.use("/cart", express.static(__dirname + "/client/build"));
+app.use('/check', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Server ok",
+  });
+})
 
 //ENDPOINT FOR ADMIN
 app.use("/api/auth", require("./routes/auth.routes"));
