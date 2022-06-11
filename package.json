@@ -1,7 +1,7 @@
 {
-  "name": "champion-pizza-fullstack",
+  "name": "champion-pizza-web-application",
   "version": "1.0.0",
-  "description": "",
+  "description": "champion-pizza server",
   "main": "server.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node server.js",
