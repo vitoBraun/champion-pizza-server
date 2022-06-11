@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
         {
-            name: 'pizza',
+            name: 'champion-pizza',
             script: 'server.js',
             instances: 1,
             autorestart: true,
