@@ -30,13 +30,7 @@ app.use("/cart", express.static(__dirname + "/client/build"));
 app.use('/api/check', (req, res) => {
   res.status(200).json({
     success: true,
-    message: "Server ok",
-  });
-})
-app.use('/api/check2', (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Server ok",
+    message: "Server ok now",
   });
 })
 
