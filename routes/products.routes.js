@@ -25,7 +25,7 @@ products = async (req, res) => {
       },
     ];
     const menu = await Category.aggregate(agregate);
-
+    console.log(`Responsed products`)
     res.json(menu);
   } catch (error) {
     console.log(error);
