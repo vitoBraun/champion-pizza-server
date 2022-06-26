@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - dev
 
 jobs:
   deploy:
@@ -19,7 +19,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          TARGET: /home/${{ secrets.REMOTE_USER }}/deploy/champion-pizza/master/server/
+          TARGET: /home/${{ secrets.REMOTE_USER }}/deploy/champion-pizza/dev/server/
           EXCLUDE: "/.git/, /.github/, .eslintrc.js, .gitignore, .nvmrc, .prettierrc.yaml, docker-compose.yml, jest.config.js, README.md"
 
       - name: Prepare
@@ -30,4 +30,4 @@ jobs:
           port: ${{ secrets.REMOTE_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /home/${{ secrets.REMOTE_USER }}/deploy/champion-pizza/master/server/ && npm i && pm2 startOrRestart ecosystem.config.js
+            cd /home/${{ secrets.REMOTE_USER }}/deploy/champion-pizza/dev/server/ && npm i && pm2 startOrRestart ecosystem.config.js NODE_ENV=development
