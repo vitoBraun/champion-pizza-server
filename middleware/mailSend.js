@@ -97,6 +97,10 @@ const mailSend = ({ totalPrice, totalCount, items }, customer, order) => {
     console.log(result);
   };
 
+  var emailAddress = process.env.MAIL_TO_ADDRESS
+  if (process.env.NODE_ENV === 'development') {
+    emailAddress = process.env.MAIL_TO_ADDRESS_DEV
+  }
   const emails = process.env.MAIL_TO_ADDRESS.split(' ')
   emails.map(email => emailSend(email))
 

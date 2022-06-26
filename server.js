@@ -11,10 +11,16 @@ app.use(express.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const upload = require("express-fileupload");
-const PORT = process.env.PORT;
+var PORT = process.env.PORT;
 var databaseURI;
+var mode = 'production'
 
 databaseURI = process.env.MONGO_URI;
+if (process.env.NODE_ENV === 'development') {
+  databaseURI = process.env.MONGO_URI_DEV;
+  PORT = process.env.PORT_DEV;
+  mode = 'development'
+}
 
 app.use(express.json({ extended: true }));
 app.use(upload({}));
@@ -52,7 +58,7 @@ async function start() {
   }
   try {
     app.listen(PORT, () => {
-      console.log(`App v2 started on port ${PORT}`);
+      console.log(`App started in ${mode} mode on port ${PORT}`);
     });
   } catch (e) {
     console.log("Server error ", e.message);
