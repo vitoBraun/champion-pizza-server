@@ -7,9 +7,7 @@ module.exports = {
             autorestart: true,
             watch: false,
             max_memory_restart: '300M',
-            env_development: {
-                NODE_ENV: "development"
-            }
+            node_args: "--NODE_ENV=development"
         },
         {
             name: 'champion-pizza',
