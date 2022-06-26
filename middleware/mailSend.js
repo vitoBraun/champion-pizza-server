@@ -97,13 +97,12 @@ const mailSend = ({ totalPrice, totalCount, items }, customer, order) => {
     console.log(result);
   };
 
-  var emailAddress = process.env.MAIL_TO_ADDRESS
+  var emailAddresses = process.env.MAIL_TO_ADDRESS
   if (process.env.NODE_ENV === 'development') {
-    emailAddress = process.env.MAIL_TO_ADDRESS_DEV
+    emailAddresses = process.env.MAIL_TO_ADDRESS_DEV
   }
-  const emails = process.env.MAIL_TO_ADDRESS.split(' ')
+  const emails = emailAddresses.split(' ')
   emails.map(email => emailSend(email))
-
 };
 
 module.exports = mailSend;
