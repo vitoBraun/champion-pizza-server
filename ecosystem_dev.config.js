@@ -2,7 +2,7 @@ module.exports = {
     apps: [
         {
             name: 'champion-pizza-dev',
-            script: 'server.js NODE_ENV=development',
+            script: 'server.js',
             instances: 1,
             autorestart: true,
             watch: false,

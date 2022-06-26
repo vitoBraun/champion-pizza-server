@@ -30,4 +30,4 @@ jobs:
           port: ${{ secrets.REMOTE_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /home/${{ secrets.REMOTE_USER }}/deploy/champion-pizza/dev/server/ && npm i && pm2 startOrRestart ecosystem_dev.config.js
+            cd /home/${{ secrets.REMOTE_USER }}/deploy/champion-pizza/dev/server/ && npm i && pm2 startOrRestart ecosystem_dev.config.js NODE_ENV=production
